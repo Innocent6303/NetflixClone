@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>
+      Netflix Clone - Vanilla JavaScript | No Framework Streaming App
+    </title>
+    <meta
+      name="description"
+      content="Open-source Netflix clone built with pure Vanilla JavaScript, HTML5, CSS3 and TMDB API. No frameworks. Perfect for learning modern web development. Free to use and customize."
+    />
+    <meta
+      name="keywords"
+      content="netflix clone, vanilla javascript, no framework, streaming app, tmdb api, html5, css3, responsive design, javascript project, web development, portfolio project"
+    />
+    <meta name="author" content="AbdulMujeeb" />
+
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="Netflix Clone - Vanilla JavaScript" />
+    <meta
+      property="og:description"
+      content="Production-grade streaming platform UI built with pure JavaScript"
+    />
+    <meta
+      property="og:image"
+      content="https://mujeebdev3.github.io/netflix-clone-vanilla-javascript/screenshots/hero-preview.png"
+    />
+    <meta
+      property="og:url"
+      content="https://mujeebdev3.github.io/netflix-clone-vanilla-javascript"
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Netflix Clone - Vanilla JavaScript" />
+    <meta
+      name="twitter:description"
+      content="Open-source streaming platform UI - No frameworks"
+    />
+    <meta
+      name="twitter:image"
+      content="https://mujeebdev3.github.io/netflix-clone-vanilla-javascript/screenshots/hero-preview.png"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: #000;
+        color: #fff;
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      /* Animated gradient background */
+      .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          #000000 0%,
+          #1a0000 50%,
+          #000000 100%
+        );
+        z-index: -2;
+      }
+
+      .bg-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle at 50% 50%,
+          rgba(229, 9, 20, 0.1) 0%,
+          transparent 50%
+        );
+        z-index: -1;
+        animation: pulse 8s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 0.6;
+        }
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+        position: relative;
+      }
+
+      .logo-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(229, 9, 20, 0.1);
+        border: 1px solid rgba(229, 9, 20, 0.3);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        margin-bottom: 2rem;
+        font-size: 0.875rem;
+        letter-spacing: 0.5px;
+        animation: slideDown 0.8s ease-out;
+      }
+
+      .logo-badge::before {
+        content: "⚡";
+        font-size: 1.2rem;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: 900;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, #fff 0%, #e50914 50%, #fff 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 3s linear infinite, slideUp 0.8s ease-out;
+        line-height: 1.1;
+      }
+
+      @keyframes shimmer {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .subtitle {
+        font-size: clamp(1rem, 3vw, 1.5rem);
+        color: #e5e5e5;
+        margin-bottom: 1rem;
+        max-width: 700px;
+        animation: fadeIn 1s ease-out 0.3s both;
+      }
+
+      .tech-stack {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 3rem;
+        animation: fadeIn 1s ease-out 0.5s both;
+      }
+
+      .tech-badge {
+        padding: 0.5rem 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .tech-badge:hover {
+        background: rgba(229, 9, 20, 0.1);
+        border-color: rgba(229, 9, 20, 0.5);
+        transform: translateY(-2px);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* CTA Buttons */
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 4rem;
+        animation: fadeIn 1s ease-out 0.7s both;
+      }
+
+      .btn {
+        padding: 1rem 2.5rem;
+        font-size: 1.125rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .btn span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .btn-primary {
+        background: #e50914;
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(229, 9, 20, 0.4);
+      }
+
+      .btn-primary:hover {
+        background: #f40612;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 30px rgba(229, 9, 20, 0.6);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.4);
+        transform: translateY(-2px);
+      }
+
+      /* Features Grid */
+      .features {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.05) 0%,
+          rgba(255, 255, 255, 0.02) 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(229, 9, 20, 0.1) 0%,
+          transparent 100%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(229, 9, 20, 0.5);
+        box-shadow: 0 12px 40px rgba(229, 9, 20, 0.2);
+      }
+
+      .feature-card:hover::before {
+        opacity: 1;
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+        position: relative;
+        z-index: 1;
+      }
+
+      .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+      }
+
+      .feature-card p {
+        color: #b3b3b3;
+        line-height: 1.6;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Stats Section */
+      .stats {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 3rem 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        text-align: center;
+        background: rgba(229, 9, 20, 0.05);
+        border-radius: 16px;
+        border: 1px solid rgba(229, 9, 20, 0.2);
+      }
+
+      .stat-item {
+        padding: 1rem;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #e50914;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        color: #b3b3b3;
+        font-size: 1rem;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        padding: 3rem 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 4rem;
+      }
+
+      .footer p {
+        color: #808080;
+        margin-bottom: 1rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1.5rem;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+      }
+
+      .social-link:hover {
+        background: rgba(229, 9, 20, 0.2);
+        border-color: #e50914;
+        transform: translateY(-3px);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero {
+          padding: 1rem;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          width: 100%;
+          max-width: 300px;
+        }
+
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .features {
+          grid-template-columns: 1fr;
+          padding: 2rem 1rem;
+        }
+
+        .stats {
+          grid-template-columns: 1fr;
+          margin: 2rem 1rem;
+        }
+      }
+
+      /* Scroll Animation */
+      .scroll-indicator {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        40% {
+          transform: translateX(-50%) translateY(-10px);
+        }
+        60% {
+          transform: translateX(-50%) translateY(-5px);
+        }
+      }
+
+      .scroll-indicator::after {
+        content: "⌄";
+        font-size: 2rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="logo-badge">
+        <span>OPEN SOURCE PROJECT</span>
+      </div>
+
+      <h1>Netflix Clone</h1>
+
+      <p class="subtitle">
+        A production-grade streaming platform UI built with
+        <strong>100% Vanilla JavaScript</strong>. No frameworks, just modern web
+        development best practices.
+      </p>
+
+      <div class="tech-stack">
+        <span class="tech-badge">HTML5</span>
+        <span class="tech-badge">CSS3</span>
+        <span class="tech-badge">Vanilla JavaScript</span>
+        <span class="tech-badge">TMDB API</span>
+        <span class="tech-badge">Responsive</span>
+      </div>
+
+      <div class="cta-buttons">
+        <a
+          href="https://github.com/mujeebdev3/netflix-clone-vanilla-javascript"
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener"
+        >
+          <span>⭐ Star on GitHub</span>
+        </a>
+        <a
+          href="https://flixvista.vercel.app/"
+          class="btn btn-secondary"
+          target="_blank"
+          rel="noopener"
+        >
+          <span>🚀 Live Demo</span>
+        </a>
+      </div>
+
+      <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="stat-item">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Vanilla JavaScript</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">0</span>
+        <span class="stat-label">Frameworks Used</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">95+</span>
+        <span class="stat-label">Lighthouse Score</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">AA</span>
+        <span class="stat-label">WCAG Compliant</span>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="feature-card">
+        <span class="feature-icon">🎬</span>
+        <h3>Real-Time Data</h3>
+        <p>
+          Powered by TMDB API with dynamic content loading, trending movies, and
+          personalized recommendations.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">📱</span>
+        <h3>Fully Responsive</h3>
+        <p>
+          Mobile-first design that works flawlessly on all devices from 320px to
+          4K displays.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">⚡</span>
+        <h3>Lightning Fast</h3>
+        <p>
+          Optimized performance with lazy loading, image optimization, and
+          efficient API caching.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">♿</span>
+        <h3>Accessible</h3>
+        <p>
+          WCAG 2.1 AA compliant with full keyboard navigation and screen reader
+          support.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🎨</span>
+        <h3>Pixel Perfect</h3>
+        <p>
+          Meticulously crafted UI matching Netflix's design with smooth
+          animations and transitions.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🔧</span>
+        <h3>Clean Code</h3>
+        <p>
+          Enterprise-grade architecture using BEM methodology and modern
+          JavaScript patterns.
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Built with ❤️ by <strong>AbdulMujeeb</strong></p>
+      <p>Free and open-source under MIT License</p>
+
+      <div class="social-links">
+        <a
+          href="https://github.com/mujeebdev3"
+          class="social-link"
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub"
+        >
+          <span>💻</span>
+        </a>
+        <a
+          href="https://github.com/mujeebdev3/netflix-clone-vanilla-javascript"
+          class="social-link"
+          target="_blank"
+          rel="noopener"
+          aria-label="Repository"
+        >
+          <span>⭐</span>
+        </a>
+      </div>
+    </footer>
+
+    <!-- Schema.org structured data for SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "Netflix Clone - Vanilla JavaScript",
+        "description": "Open-source Netflix clone built with pure JavaScript, HTML5, CSS3 and TMDB API",
+        "author": {
+          "@type": "Person",
+          "name": "AbdulMujeeb"
+        },
+        "programmingLanguage": "JavaScript",
+        "codeRepository": "https://github.com/mujeebdev3/netflix-clone-vanilla-javascript",
+        "keywords": "netflix clone, vanilla javascript, streaming app, tmdb api"
+      }
+    </script>
+  </body>
+</html>
