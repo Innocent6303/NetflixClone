@@ -7,7 +7,7 @@
  * @description Pure JavaScript Netflix clone with TMDB API integration
  * @author      Abdul Mujeeb
  * @license     MIT
- * @copyright   2023 Netflix Clone Demo. All rights reserved.
+ * @copyright   2025 Netflix Clone Demo. All rights reserved.
  *
  * DISCLAIMER:
  * This project is a demonstration/portfolio piece and is NOT affiliated with,

@@ -7,7 +7,7 @@
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Site-E50914?style=for-the-badge)](https://flixvista.vercel.app/)
 
 <!-- [![GitHub Stars](https://img.shields.io/github/stars/mujeebdev3/netflix-clone-vanilla-javascript?style=for-the-badge&logo=github&color=E50914)](https://github.com/mujeebdev3/netflix-clone-vanilla-javascript/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/yourusername/netflix-clone?style=for-the-badge&logo=github&color=E50914)](https://github.com/yourusername/netflix-clone/network/members) -->
+-->
 <p align="center">
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" />
@@ -540,7 +540,7 @@ Tested on:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/yourusername/netflix-clone/issues) or submit a new issue.
+Feel free to check the [issues page](https://github.com/mujeebdev3/netflix-clone-vanilla-javascript/issues) or submit a new issue.
 
 ### How to Contribute
 
@@ -617,6 +617,6 @@ Have feedback, suggestions, or questions? I'd love to hear from you!
 
 ---
 
-**Netflix Clone** © 2023 • [MIT License](LICENSE)
+**Netflix Clone** © 2025 • [MIT License](LICENSE)
 
 </div>
